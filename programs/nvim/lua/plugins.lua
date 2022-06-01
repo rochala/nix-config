@@ -1,0 +1,53 @@
+_ = vim.cmd [[packadd packer.nvim]]
+
+return require("packer").startup {
+  function(use)
+
+    use "chriskempson/base16-vim"
+
+    use "tpope/vim-commentary"
+    use "tpope/vim-surround"
+    use "tpope/vim-fugitive"
+
+    use { "nvim-lua/telescope.nvim",
+      requires = {
+        { "nvim-lua/popup.nvim" },
+        { "nvim-lua/plenary.nvim" },
+        { "nvim-telescope/telescope-fzy-native.nvim" },
+      },
+    }
+
+    use { "junegunn/fzf", run = function() vim.fn["fzf#install()"](0) end }
+    use "junegunn/fzf.vim"
+    use "lewis6991/gitsigns.nvim"
+
+    use {"ckipp01/stylua-nvim", run = "cargo install stylua"}
+
+    use "lukas-reineke/indent-blankline.nvim"
+    use "neovim/nvim-lspconfig"
+    use "nvim-lua/lsp-status.nvim"
+    use "scalameta/nvim-metals"
+    use "mfussenegger/nvim-dap"
+
+    use "hrsh7th/nvim-cmp"
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "hrsh7th/cmp-cmdline"
+    use "hrsh7th/cmp-vsnip"
+    use "onsails/lspkind-nvim"
+    use "hrsh7th/vim-vsnip"
+    -- use "windwp/nvim-autopairs"
+    use "ray-x/lsp_signature.nvim"
+    use "wbthomason/packer.nvim"
+    use "petertriho/nvim-scrollbar"
+
+    use "nvim-treesitter/nvim-treesitter"
+    use "szw/vim-maximizer"
+    use "rebelot/kanagawa.nvim"
+    use "jiangmiao/auto-pairs"
+
+-- Plug "tjdevries/lsp_extensions.nvim"
+
+  end
+}
