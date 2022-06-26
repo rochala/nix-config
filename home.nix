@@ -25,7 +25,6 @@ in {
   xdg.configFile."./nvim/lua".source = ./programs/nvim/lua;
   xdg.configFile."./nvim/plugin".source = ./programs/nvim/plugin;
   xdg.configFile."./tmux/tmux.conf".source = ./programs/tmux/tmux.conf;
-  xdg.configFile."./karabiner/karabiner.json".source = ./programs/karabiner/karabiner.json;
 
   home = {
     username = "jrochala";
@@ -34,7 +33,10 @@ in {
       LANG = "en_US.UTF-8";
       EDITOR = "nvim";
       TERMINAL = "alacritty";
-      SHELL = "~/.nix-profile/bin/zsh";
+      SHELL = "/Users/jrochala/.nix-profile/bin/zsh";
+    };
+    file = {
+      "./karabiner/karabiner.json" = { source = ./programs/karabiner/karabiner.json; };
     };
   };
 }

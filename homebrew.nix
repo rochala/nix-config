@@ -31,6 +31,8 @@ in {
     "karabiner-elements"
     "flux"
     "visual-studio-code"
+    "qbittorrent"
+    "epic-games"
   ];
 
 }

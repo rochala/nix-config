@@ -23,8 +23,9 @@ Metals_config.settings = {
     "-Xss10m",
     "-XX:+CrashOnOutOfMemoryError",
   },
-  serverVersion = "0.11.6-SNAPSHOT",
 }
+
+Metals_config.settings.serverVersion = "0.11.7-SNAPSHOT"
 
 -- local lsp_group = vim.api.nvim_create_augroup("lsp", { clear = true })
 

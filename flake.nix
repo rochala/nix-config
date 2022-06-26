@@ -13,8 +13,6 @@
 
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     flake-utils.url = "github:numtide/flake-utils";
-
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:

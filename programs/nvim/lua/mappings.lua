@@ -46,7 +46,7 @@ map("n", "<leader>vrn", ":lua vim.lsp.buf.rename()<CR>")
 map("n", "<leader>vh", ":lua vim.lsp.buf.hover()<CR>")
 map("n", "<leader>vca", ":lua vim.lsp.buf.code_action()<CR>")
 map("n", "<leader>vcl", ":lua vim.lsp.codelens.run()<CR>")
-map("n", "<leader>vsd", ":lua vim.lsp.diagnostic.show()CR>")
+map("n", "<leader>vsd", ":lua require('telescope.builtin').diagnostics()CR>")
 
 map("v", "<leader>p", "\"_dP")
 map("n", "<leader>y", "\"+y")
