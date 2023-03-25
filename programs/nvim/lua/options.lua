@@ -4,7 +4,7 @@ local global_opt = vim.opt_global
 local indent = 2
 
 -- global
-global_opt.shortmess:remove("F"):append("c")
+global_opt.shortmess:append("c")
 global_opt.termguicolors = true
 global_opt.hidden = true
 global_opt.showtabline = 1
@@ -15,7 +15,7 @@ global_opt.wildignore = { ".git", "*/node_modules/*", "*/target/*", ".metals", "
 global_opt.ignorecase = true
 global_opt.smartcase = true
 global_opt.clipboard = "unnamed"
-global_opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+global_opt.completeopt = { "menuone", "noinsert" }
 global_opt.formatoptions = "cqrnj"
 global_opt.scrolloff = 8
 global_opt.lazyredraw = true

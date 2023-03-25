@@ -1,11 +1,12 @@
 local cmp = require'cmp'
+local compare = require('cmp.config.compare')
 local lspkind = require('lspkind')
--- local cond = require("nvim-autopairs.conds")
--- local npairs = require('nvim-autopairs')
--- npairs.setup()
--- local Rule = require('nvim-autopairs.rule')
--- npairs.add_rule(Rule('"', '"')
---   :with_pair(cond.not_after_text('""')))
+local cond = require("nvim-autopairs.conds")
+local npairs = require('nvim-autopairs')
+npairs.setup()
+local Rule = require('nvim-autopairs.rule')
+npairs.add_rule(Rule('"', '"')
+  :with_pair(cond.not_after_text('""')))
 
 -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
@@ -32,6 +33,22 @@ cmp.setup({
         path = "[Path]",
       },
     },
+  },
+  preselect = cmp.PreselectMode.None,
+  sorting = {
+    priority_weight = 2,
+    comparators = {
+      compare.offset,
+      compare.score,
+      compare.sort_text,
+      compare.recently_used,
+      compare.kind,
+      compare.length,
+      compare.order,
+    },
+  },
+  completion = {
+    completeopt = 'menu,menuone',
   },
   mapping = {
   -- None of this made sense to me when first looking into this since there
@@ -69,10 +86,11 @@ cmp.setup({
       end,
   },
   sources = {
-      { name = 'nvim_lsp', priority = 99 },
+      { name = 'nvim_lsp', priority = 10 },
       { name = 'buffer', max_item_count = 10 },
       { name = 'path' },
       { name = "vsnip" },
+      { name = 'nvim_lsp_signature_help' },
   },
 
 })

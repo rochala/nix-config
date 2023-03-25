@@ -13,7 +13,11 @@ require("indent_blankline").setup({
 })
 
 require('gitsigns').setup()
-require("scrollbar").setup()
+require("scrollbar").setup({
+  handlers = {
+    gitsigns = true
+  }
+})
 
 cmd([[hi! link StatusError DiagnosticError]])
 cmd([[hi! link StatusWarn DiagnosticWarn]])

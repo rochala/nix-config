@@ -84,7 +84,7 @@ end
 Status_line = function()
   return table.concat({
     --"%#StatusBackground#",
-    " %t ", -- filename only
+    " %f ", -- filename only
     readonly(),
     get_modified(),
     get_branch(),

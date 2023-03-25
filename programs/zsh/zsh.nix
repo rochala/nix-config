@@ -35,8 +35,26 @@
   ";
 
   initExtra = ''
+    export JAVA_17_HOME=$(/usr/libexec/java_home -v 17)
+    export JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8)
+    alias java17="export JAVA_HOME=$JAVA_17_HOME"
+    alias java8="export JAVA_HOME=$JAVA_8_HOME"
+    #set default to Java 17
+    java17
+
+    alias nvim-test="export XDG_CONFIG_HOME=~/.config/nix-config/programs; nvim; unset XDG_CONFIG_HOME"
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
+    export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+    export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
+    export PATH="$PATH:/Users/jrochala/Library/Application Support/Coursier/bin"
+    export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
+    export PATH=~/.npm-packages/bin:$PATH
+    export NODE_PATH=~/.npm-packages/lib/node_modules
+    GPG_TTY=$(tty)
+    export GPG_TTY
+
+    source ~/.ghcup/env
   '';
 
   plugins = [

@@ -6,34 +6,51 @@ let
 in {
   environment.shellInit = ''eval "$(${config.homebrew.brewPrefix}/brew shellenv)'';
 
-  homebrew.enable = true;
-  homebrew.autoUpdate = true;
-  homebrew.cleanup = "zap";
-  homebrew.global.brewfile = true;
-  homebrew.global.noLock = true;
+  homebrew = {
+    enable = true;
+    onActivation.autoUpdate = true;
+    onActivation.cleanup = "zap";
+    global.brewfile = true;
+    global.lockfiles = false;
+    onActivation.upgrade = true;
 
-  homebrew.taps = [
-    "homebrew/cask"
-    "homebrew/cask-versions"
-  ];
+    taps = [
+      "homebrew/cask"
+      "homebrew/cask-versions"
+    ];
 
-  homebrew.casks = [
-    "alacritty"
-    "alfred"
-    "discord-ptb"
-    "firefox"
-    "slack"
-    "spotify"
-    "tutanota"
-    "vlc"
-    "signal"
-    "steam"
-    "karabiner-elements"
-    "flux"
-    "visual-studio-code"
-    "qbittorrent"
-    "epic-games"
-  ];
+    brews = [
+      "openjdk@17"
+      "node@14"
+      "ltex-ls"
+    ];
+
+    casks = [
+      "alacritty"
+      "alfred"
+      "temurin8"
+      "discord-ptb"
+      "firefox"
+      "slack"
+      "spotify"
+      "tutanota"
+      "vlc"
+      "signal"
+      "steam"
+      "karabiner-elements"
+      "flux"
+      "visual-studio-code"
+      "qbittorrent"
+      "firefox-developer-edition"
+      "obsidian"
+      "figma"
+      "intellij-idea-ce"
+      "google-chrome"
+      "element"
+      "nvidia-geforce-now"
+      "visualvm"
+    ];
+  };
 
 }
 

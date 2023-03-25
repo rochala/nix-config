@@ -1,6 +1,8 @@
 local functions = require("functions")
 local map = functions.map
 
+require("gitlinker").setup()
+
 map("t", "<C-x>", "<C-\\><C-n>")
 map("i", "<C-c>", "<esc>")
 
@@ -20,9 +22,7 @@ map("n", "<leader>/", ":so ~/.config/nvim/init.lua<CR>")
 map("n", "<leader>[", ":vertical resize +5<CR>")
 map("n", "<leader>]", ":vertical resize -5<CR>")
 
--- inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
--- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>" nnoremap <leader>gc :GBranches<CR> nnoremap <leader>ga :Git fetch --all<CR>
--- nnoremap <leader>grum :Git rebase upstream/master<CR>
+-- inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>" nnoremap <leader>gc :GBranches<CR> nnoremap <leader>ga :Git fetch --all<CR> nnoremap <leader>grum :Git rebase upstream/master<CR>
 -- nnoremap <leader>grom :Git rebase origin/master<CR>
 -- nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 
@@ -32,6 +32,7 @@ map("n", "<Leader>pf", ":lua require('telescope.builtin').find_files({layout_str
 map("n", "<Leader>pg", ":lua require('telescope.builtin').git_status({layout_strategy='vertical', layout_config = { width=0.8, height=0.8} })<CR>")
 map("n", "<Leader>pb", ":lua require('telescope.builtin').buffers({layout_strategy='vertical', layout_config = { width=0.8, height=0.8} })<CR>")
 map("n", "<leader>ph", ":lua require('telescope.builtin').help_tags()<CR>")
+map("n", "<leader>pu", ":lua require('telescope').extensions.undo.undo()<CR>")
 map("n", "<C-p>", ":lua require('telescope.builtin').git_files()<CR>")
 
 map("n", "<leader>bs", "/<C-R>=escape(expand(\"<cWORD>\"), \"/\")<CR><CR>")
@@ -46,8 +47,14 @@ map("n", "<leader>vrn", ":lua vim.lsp.buf.rename()<CR>")
 map("n", "<leader>vh", ":lua vim.lsp.buf.hover()<CR>")
 map("n", "<leader>vca", ":lua vim.lsp.buf.code_action()<CR>")
 map("n", "<leader>vcl", ":lua vim.lsp.codelens.run()<CR>")
-map("n", "<leader>vsd", ":lua require('telescope.builtin').diagnostics()CR>")
+map("n", "<leader>vsd", ":lua require('telescope.builtin').diagnostics()<CR>")
 
+map("n", "<leader>vse", ":lua vim.diagnostic.setqflist({ severity = 'E' })<CR>")
+map("n", "<leader>nd", ":lua vim.diagnostic.goto_next()<CR>")
+map("n", "<leader>pd", ":lua vim.diagnostic.goto_prev()<CR>")
+
+
+map("n", "<leader>ld", ":lua vim.diagnostic.open_float(0, { scope = 'line' })<CR>")
 map("v", "<leader>p", "\"_dP")
 map("n", "<leader>y", "\"+y")
 map("v", "<leader>y", "\"+y")
@@ -72,6 +79,17 @@ map("n", "<leader>gsb", ":Gitsigns toggle_current_line_blame<CR>")
 map('n', '<leader>j', "&diff ? '<leader>gn' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
 map('n', '<leader>k', "&diff ? '<leader>gp' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
 
+-- dap
+-- Example mappings for usage with nvim-dap. If you don't use that, you can
+-- skip these
+map("n", "<leader>dc", ":lua require('dap').continue()<CR>")
+map("n", "<leader>dr", ":lua require('dap').repl.toggle()<CR>")
+map("n", "<leader>dK", ":lua require('dap.ui.widgets').hover()<CR>")
+map("n", "<leader>dt", ":lua require('dap').toggle_breakpoint()<CR>")
+map("n", "<leader>dso", ":lua require('dap').step_over()<CR>")
+map("n", "<leader>dsi", ":lua require('dap').step_into()<CR>")
+map("n", "<leader>dl", ":lua require('dap').run_last()<CR>")
+
 local wrap_mapping = function(mapping)
     return mapping .. ':IndentBlanklineRefresh<CR>'
   end
@@ -84,5 +102,5 @@ vim.keymap.set('n', 'zr', wrap_mapping('zr'), {silent = true})
 vim.keymap.set('n', 'zR', wrap_mapping('zR'), {silent = true})
 
 -- map("n", "<leader>tt", [[<cmd>lua require("metals.tvp").toggle_tree_view()<CR>]])
--- map("n", "<leader>tr", [[<cmd>lua require("metals.tvp").reveal_in_tree()<CR>]])
+--complete map("n", "<leader>tr", [[<cmd>lua require("metals.tvp").reveal_in_tree()<CR>]])
 

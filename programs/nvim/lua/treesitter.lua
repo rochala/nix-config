@@ -6,8 +6,7 @@ require("nvim-treesitter.configs").setup({
     lint_events = { "BufWrite", "CursorHold" },
   },
   highlight = {
-    enable = true,
-    disable = { "scala" },
+    enable = true
   },
   incremental_selection = {
     enable = true,

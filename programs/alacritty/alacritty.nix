@@ -5,8 +5,8 @@
     env.TERM = "xterm-256color";
 
     window.padding = {
-      x = 10;
-      y = 10;
+      x = 5;
+      y = 5;
     };
 
     window.decorations = "Buttonless";

@@ -1,4 +1,6 @@
+{ pkgs, ... }:
 {
   enable = true;
-  extraConfig = "lua require('init')";
+  package = pkgs.unstable.neovim-unwrapped;
+  /* extraConfig = "lua require('init')"; */
 }
