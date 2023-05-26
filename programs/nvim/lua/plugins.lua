@@ -51,21 +51,19 @@ return require("packer").startup {
     use "szw/vim-maximizer"
     use "rebelot/kanagawa.nvim"
 
+    use 'nvim-tree/nvim-web-devicons'
+    use 'stevearc/oil.nvim'
+
     use "folke/neodev.nvim"
-    use {
-      "folke/zen-mode.nvim",
-      config = function()
-        require("zen-mode").setup {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        }
-      end
-    }
+    use "folke/zen-mode.nvim"
 
     use {
         'ruifm/gitlinker.nvim',
         requires = 'nvim-lua/plenary.nvim',
+    }
+    use "github/copilot.vim"
+    use {
+      "lvimuser/lsp-inlayhints.nvim", branch = 'anticonceal'
     }
 
 

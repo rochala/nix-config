@@ -17,9 +17,11 @@ require("mappings")
 require("completions")
 require("statusline")
 require("augroups")
+require("plugin_configuration")
 require("telescope_settings")
 require("treesitter")
 require("visuals")
+
 
 if vim.fn.executable("rg") then
     g.rg_derive_root = "true"

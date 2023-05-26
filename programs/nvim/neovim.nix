@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  enable = true;
-  package = pkgs.unstable.neovim-unwrapped;
+  /* enable = true;
+  /* package = pkgs.neovim-nightly;
   /* extraConfig = "lua require('init')"; */
 }

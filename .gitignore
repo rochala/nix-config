@@ -1,3 +1,6 @@
 result
 *.DS_Store
 .luarc.json
+github-copilot
+packer_compiled.lua
+

@@ -21,7 +21,6 @@ in {
 
     brews = [
       "openjdk@17"
-      "node@14"
       "ltex-ls"
     ];
 

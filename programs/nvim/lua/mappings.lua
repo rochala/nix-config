@@ -22,6 +22,7 @@ map("n", "<leader>/", ":so ~/.config/nvim/init.lua<CR>")
 map("n", "<leader>[", ":vertical resize +5<CR>")
 map("n", "<leader>]", ":vertical resize -5<CR>")
 
+
 -- inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>" nnoremap <leader>gc :GBranches<CR> nnoremap <leader>ga :Git fetch --all<CR> nnoremap <leader>grum :Git rebase upstream/master<CR>
 -- nnoremap <leader>grom :Git rebase origin/master<CR>
 -- nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
@@ -45,6 +46,7 @@ map("n", "<leader>vsh", ":lua vim.lsp.buf.signature_help()<CR>")
 map("n", "<leader>vrr", ":lua require('telescope.builtin').lsp_references()<CR>")
 map("n", "<leader>vrn", ":lua vim.lsp.buf.rename()<CR>")
 map("n", "<leader>vh", ":lua vim.lsp.buf.hover()<CR>")
+map("v", "<leader>vh", ":lua require('metals').type_of_range()<CR>")
 map("n", "<leader>vca", ":lua vim.lsp.buf.code_action()<CR>")
 map("n", "<leader>vcl", ":lua vim.lsp.codelens.run()<CR>")
 map("n", "<leader>vsd", ":lua require('telescope.builtin').diagnostics()<CR>")

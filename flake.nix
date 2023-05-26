@@ -8,11 +8,13 @@
     darwin.url = "github:lnl7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     flake-utils.url = "github:numtide/flake-utils";
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, darwin, nixpkgs, unstable, home-manager, ... }@inputs:
@@ -28,7 +30,10 @@
 
     nixpkgsConfig = {
       config = { allowUnfree = true; };
-      overlays = [ overlay-unstable ];
+      overlays = [
+        overlay-unstable
+        inputs.neovim-nightly-overlay.overlay
+      ];
     };
   in {
     darwinConfigurations = rec {

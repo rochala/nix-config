@@ -12,13 +12,15 @@
     window.decorations = "Buttonless";
 
     window.startup_mode = "SimpleFullscreen";
-    font.normal = {
-      family = "FiraCode Nerd Font Mono";
-      style = "Retina";
-    };
-    font.italic = {
-      family = "JetBrains Mono";
-      style = "Light Italic";
+    font = {
+      normal = {
+        family = "FiraCode Nerd Font Mono";
+        style = "Retina";
+      };
+      italic = {
+        family = "JetBrains Mono";
+        style = "Light Italic";
+      };
     };
 
   # Colorshceme kanagwa

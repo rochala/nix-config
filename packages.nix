@@ -25,6 +25,7 @@ let
     docker
     colima
     languagetool
+    nodejs
   ];
 
 in homePackages

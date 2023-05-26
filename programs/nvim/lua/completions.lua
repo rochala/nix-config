@@ -10,10 +10,13 @@ npairs.add_rule(Rule('"', '"')
 
 -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
-require("lspkind").init({
-	mode = "text_symbol",
-  preset = 'codicons',
-})
+-- require("lspkind").init({
+-- 	mode = "text_symbol",
+--   preset = 'codicons',
+-- })
+
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_no_tab_map = true
 
 -- cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { scala = '' }, map_complete = false }))
 cmp.setup({
@@ -25,7 +28,8 @@ cmp.setup({
   },
   formatting = {
     format = lspkind.cmp_format {
-      maxwidth = 50,
+      mode = "symbol_text",
+      maxwidth = 80,
       with_text = true,
       menu = {
         nvim_lsp = "[LSP]",
@@ -80,6 +84,14 @@ cmp.setup({
       ["<Up>"] = function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end,
+      ["<right>"] = function(fallback)
+        local copilot_keys = vim.fn["copilot#Accept"]()
+        if copilot_keys ~= "" then
+          vim.api.nvim_feedkeys(copilot_keys, "i", true)
         else
           fallback()
         end

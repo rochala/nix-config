@@ -15,30 +15,57 @@ lsp_status.register_progress()
 -- })
 
 -- METALS -------------------------------------------------------------
-Metals_config = require("metals").bare_config{}
+Metals_config = require("metals").bare_config()
 
 Metals_config.settings = {
   showImplicitArguments = true,
   showImplicitConversionsAndClasses = true,
   superMethodLensesEnabled = false,
   showInferredType = true,
-  enableSemanticHighlighting = true,
+  -- enableSemanticHighlighting = true,
   excludedPackages = {
     "akka.actor.typed.javadsl",
     "com.github.swagger.akka.javadsl",
     "akka.stream.javadsl",
   },
-  serverVersion = "latest.snapshot",
+  -- serverVersion = "latest.snapshot",
+  serverVersion = "0.11.13-SNAPSHOT",
   serverProperties = {
     "-Dmetals.verbose=true",
     "-Xmx4g",
     "-Xss10m",
     "-XX:+CrashOnOutOfMemoryError",
+    -- "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=localhost:5055"
   },
 }
 
 Metals_config.init_options.statusBarProvider = "on"
-Metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local completion_capabilities =  require("cmp_nvim_lsp").default_capabilities()
+local inline_capabilities = {
+  workspace = {
+    inlayHint = {
+      refreshSupport = true
+    },
+  },
+  textDocument = {
+    inlayHint = {
+      resolveSupport = {
+        properties = {
+          "tooltip",
+          "textEdits",
+          "label.tooltip",
+          "label.location",
+          "label.command"
+        }
+      },
+      dynamicRegistration =  true
+    }
+  }
+}
+
+
+Metals_config.capabilities = vim.tbl_deep_extend("force", completion_capabilities, inline_capabilities)
 
 -- Metals_config.on_attach = function(_, _)
 --   vim.cmd([[autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()]])
@@ -68,7 +95,26 @@ dap.configurations.scala = {
   },
 }
 
+require("lsp-inlayhints").setup({
+
+})
+
+vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = "LspAttach_inlayhints",
+	callback = function(args)
+		if not (args.data and args.data.client_id) then
+			return
+		end
+
+		local bufnr = args.buf
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		require("lsp-inlayhints").on_attach(client, bufnr)
+	end,
+})
+
 Metals_config.on_attach = function(client, bufnr)
+  require("lsp-inlayhints").on_attach(client, bufnr, true)
   require("metals").setup_dap()
 end
 
@@ -96,6 +142,9 @@ lspconfig.lua_ls.setup {
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
+      },
+      hint = {
+        enable = true
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
