@@ -26,9 +26,8 @@ return require("packer").startup {
 
     use "lukas-reineke/indent-blankline.nvim"
     use "neovim/nvim-lspconfig"
-    use "nvim-lua/lsp-status.nvim"
-    -- use "~/Projects/nvim-metals"
-    use "scalameta/nvim-metals"
+    use "~/Projects/nvim-metals"
+    -- use "scalameta/nvim-metals"
     use "mfussenegger/nvim-dap"
 
     use "hrsh7th/nvim-cmp"
@@ -65,6 +64,8 @@ return require("packer").startup {
     use {
       "lvimuser/lsp-inlayhints.nvim", branch = 'anticonceal'
     }
+    use "sindrets/diffview.nvim"
+    use "sourcegraph/sg.nvim"
 
 
 -- Plug "tjdevries/lsp_extensions.nvim"

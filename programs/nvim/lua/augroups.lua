@@ -12,8 +12,8 @@ vim.cmd([[autocmd TextYankPost * silent! lua vim.highlight.on_yank {}]])
 -- Remove trailing whitespaces
 vim.cmd([[autocmd BufWritePre *.scala :%s/\s\+$//e]])
 
-vim.cmd([[augroup file_fix
-  autocmd!
-    autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
-  augroup END
-]])
+-- vim.cmd([[augroup file_fix
+--   autocmd!
+--     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
+--   augroup END
+-- ]])

@@ -5,6 +5,7 @@ local indent = 2
 
 -- global
 global_opt.shortmess:append("c")
+global_opt.exrc = true
 global_opt.termguicolors = true
 global_opt.hidden = true
 global_opt.showtabline = 1

@@ -3,9 +3,8 @@ require("neodev").setup({
 })
 
 local lspconfig = require('lspconfig')
-
-local lsp_status = require('lsp-status')
-lsp_status.register_progress()
+local conf = require("metals.config")
+local log = require("metals.log")
 
 -- -- lsp diagnostic lines
 -- require("lsp_lines").setup()
@@ -14,24 +13,20 @@ lsp_status.register_progress()
 --   virtual_lines = true
 -- })
 
--- METALS -------------------------------------------------------------
-Metals_config = require("metals").bare_config()
-
-Metals_config.settings = {
-  showImplicitArguments = true,
-  showImplicitConversionsAndClasses = true,
+local metals_client_settings = {
+  showImplicitArguments = false,
+  showImplicitConversionsAndClasses = false,
   superMethodLensesEnabled = false,
   showInferredType = true,
-  -- enableSemanticHighlighting = true,
+  enableSemanticHighlighting = false,
   excludedPackages = {
     "akka.actor.typed.javadsl",
     "com.github.swagger.akka.javadsl",
     "akka.stream.javadsl",
   },
-  -- serverVersion = "latest.snapshot",
-  serverVersion = "0.11.13-SNAPSHOT",
+  -- serverVersion = local_config.config.metals_server_version,
+  serverVersion = "1.1.1-SNAPSHOT",
   serverProperties = {
-    "-Dmetals.verbose=true",
     "-Xmx4g",
     "-Xss10m",
     "-XX:+CrashOnOutOfMemoryError",
@@ -39,6 +34,22 @@ Metals_config.settings = {
   },
 }
 
+-- use path in case of local "SNAPSHOT" versions, else don't set it and use coursiers to resolve it.
+
+-- METALS -------------------------------------------------------------
+Metals_config = require("metals").bare_config()
+
+LSP = {}
+LSP.update_metals_setting = function(key, value)
+  local message = string.format("Setting %s is now %s changed from %s", key, value, metals_client_settings[key])
+  metals_client_settings[key] = value
+  log.info_and_show(message)
+
+  vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = { metals = metals_client_settings} })
+
+end
+
+Metals_config.settings = metals_client_settings
 Metals_config.init_options.statusBarProvider = "on"
 
 local completion_capabilities =  require("cmp_nvim_lsp").default_capabilities()
@@ -65,7 +76,7 @@ local inline_capabilities = {
 }
 
 
-Metals_config.capabilities = vim.tbl_deep_extend("force", completion_capabilities, inline_capabilities)
+Metals_config.capabilities = vim.tbl_deep_extend("force", completion_capabilities, {})
 
 -- Metals_config.on_attach = function(_, _)
 --   vim.cmd([[autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()]])
@@ -168,13 +179,17 @@ lspconfig.lua_ls.setup {
 -- HASKELL -------------------------------------------------------------
 lspconfig.hls.setup {
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
-  capabilities = capabilities
+  capabilities = completion_capabilities 
 }
 
 -- CSS -----------------------------------------------------------------
 
 lspconfig.cssls.setup {
-  capabilities = capabilities,
+  capabilities = completion_capabilities,
+}
+
+lspconfig.rust_analyzer.setup {
+  capabilities = completion_capabilities,
 }
 
 -- Language Tool
@@ -182,3 +197,5 @@ lspconfig.ltex.setup{}
 
 -- Nix
 lspconfig.rnix.setup{}
+
+return LSP

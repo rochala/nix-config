@@ -4,7 +4,7 @@ let
   externalPackages = import ./packages.nix { inherit pkgs; };
   allPackages = externalPackages;
 in {
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   programs = {
     alacritty = import ./programs/alacritty/alacritty.nix;

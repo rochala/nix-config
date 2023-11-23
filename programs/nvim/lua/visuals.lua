@@ -6,12 +6,6 @@ vim.fn.sign_define("DiagnosticSignWarn", { text = "▬", texthl = "DiagnosticWar
 vim.fn.sign_define("DiagnosticSignInfo", { text = "▬", texthl = "DiagnosticInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = "▬", texthl = "DiagnosticHint" })
 
-require("indent_blankline").setup({
-    char = "⋅",
-    filetype_exclude = { "help" },
-    show_trailing_blankline_indent = false,
-})
-
 require('gitsigns').setup()
 require("scrollbar").setup()
 
@@ -32,8 +26,22 @@ cmd([[hi! DiagnosticUnderlineInfo cterm=NONE gui=underline guifg=NONE]])
 cmd([[hi! DiagnosticUnderlineHint cterm=NONE gui=underline guifg=NONE]])
 cmd([[hi! link DiagnosticHint DiagnosticInfo]])
 
-cmd([[hi! IndentBlanklineChar guifg=#445060 gui=nocombine]])
+cmd([[hi! IndentBlanklineChar guifg=#333342 gui=nocombine]])
 
 cmd([[hi! TelescopeTitle guifg=#e5c07b]])
+
+local highlight = {
+  "IndentBlanklineChar",
+}
+
+require("ibl").setup {
+    indent = { highlight = highlight },
+    -- whitespace = {
+    --     highlight = highlight,
+    --     remove_blankline_trail = false,
+    -- },
+    -- scope = { enabled = false },
+}
+
 
 

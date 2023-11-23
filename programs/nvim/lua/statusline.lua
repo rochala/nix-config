@@ -63,6 +63,10 @@ local function metals_status()
   return vim.g["metals_status"] or ""
 end
 
+local function bsp_status()
+  return vim.g["bsp_status"] or ""
+end
+
 local function readonly()
   if opt.readonly:get() then
     return "  "
@@ -96,6 +100,7 @@ Status_line = function()
     metals_status(),
     debug_session(),
     "%=", -- Left and Right divider
+    bsp_status(),
     "%l, ", -- line number
     "%c ", -- column number
     scrollbar(),

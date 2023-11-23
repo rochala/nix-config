@@ -2,13 +2,13 @@
   description = "Jedrzej's system config";
     
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-22.11-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.05-darwin";
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     darwin.url = "github:lnl7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager/release-22.11";
+    home-manager.url = "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };

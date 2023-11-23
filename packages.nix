@@ -14,8 +14,6 @@ let
     passExtensions.pass-otp
     tree
     youtube-dl
-    python
-    python2
     wget
     git
     unstable.lua-language-server
@@ -25,7 +23,8 @@ let
     docker
     colima
     languagetool
-    nodejs
+    nodejs_18
+    rustup
   ];
 
 in homePackages

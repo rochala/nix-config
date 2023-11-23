@@ -26,15 +26,18 @@ map("n", "<leader>]", ":vertical resize -5<CR>")
 -- inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>" nnoremap <leader>gc :GBranches<CR> nnoremap <leader>ga :Git fetch --all<CR> nnoremap <leader>grum :Git rebase upstream/master<CR>
 -- nnoremap <leader>grom :Git rebase origin/master<CR>
 -- nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
-
+map("n", "<leader>smv", ":lua require('config_variables').set_metals_version()<CR>")
 map("n", "<leader>pw", ":lua require('telescope.builtin').grep_string({ search = vim.fn.expand('<cword>'), layout_strategy='vertical', layout_config = { width=0.8, height=0.8} })<CR>")
 map("n", "<leader>ps", ":lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For >'), layout_strategy='vertical', layout_config = { width=0.8, height=0.8} })<CR>")
-map("n", "<Leader>pf", ":lua require('telescope.builtin').find_files({layout_strategy='vertical', layout_config = { width=0.8, height=0.8} })<CR>")
+map("n", "<Leader>pf", ":lua require('telescope.builtin').find_files({hidden=true, layout_strategy='vertical', layout_config = { width=0.8, height=0.8} })<CR>")
 map("n", "<Leader>pg", ":lua require('telescope.builtin').git_status({layout_strategy='vertical', layout_config = { width=0.8, height=0.8} })<CR>")
 map("n", "<Leader>pb", ":lua require('telescope.builtin').buffers({layout_strategy='vertical', layout_config = { width=0.8, height=0.8} })<CR>")
 map("n", "<leader>ph", ":lua require('telescope.builtin').help_tags()<CR>")
 map("n", "<leader>pu", ":lua require('telescope').extensions.undo.undo()<CR>")
 map("n", "<C-p>", ":lua require('telescope.builtin').git_files()<CR>")
+map("n", "gds", ":lua vim.lsp.buf.document_symbol()")
+map("n", "gws", ":lua vim.lsp.buf.workspace_symbol()")
+
 
 map("n", "<leader>bs", "/<C-R>=escape(expand(\"<cWORD>\"), \"/\")<CR><CR>")
 
