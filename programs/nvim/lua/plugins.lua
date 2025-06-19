@@ -24,9 +24,10 @@ return require("packer").startup {
 
     use {"ckipp01/stylua-nvim", run = "cargo install stylua"}
 
-    use "lukas-reineke/indent-blankline.nvim"
+    -- use "lukas-reineke/indent-blankline.nvim"
     use "neovim/nvim-lspconfig"
     use "~/Projects/nvim-metals"
+    -- use { "catppuccin/nvim", as = "catppuccin" }
     -- use "scalameta/nvim-metals"
     use "mfussenegger/nvim-dap"
 
@@ -36,7 +37,9 @@ return require("packer").startup {
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/cmp-vsnip"
-    use "hrsh7th/cmp-nvim-lsp-signature-help"
+    -- use "hrsh7th/cmp-nvim-lsp-signature-help"
+
+    use "~/Projects/cmp-nvim-lsp-signature-help"
     use "onsails/lspkind-nvim"
     use "hrsh7th/vim-vsnip"
     use "windwp/nvim-autopairs"
@@ -47,6 +50,7 @@ return require("packer").startup {
 
     use "nvim-treesitter/nvim-treesitter"
     use "nvim-treesitter/playground"
+    use "VidocqH/lsp-lens.nvim"
     use "szw/vim-maximizer"
     use "rebelot/kanagawa.nvim"
 
@@ -54,18 +58,28 @@ return require("packer").startup {
     use 'stevearc/oil.nvim'
 
     use "folke/neodev.nvim"
+    use {
+        'folke/todo-comments.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+    }
     use "folke/zen-mode.nvim"
 
     use {
         'ruifm/gitlinker.nvim',
         requires = 'nvim-lua/plenary.nvim',
     }
-    use "github/copilot.vim"
+    -- use "github/copilot.vim"
+    use { "zbirenbaum/copilot.lua" }
     use {
-      "lvimuser/lsp-inlayhints.nvim", branch = 'anticonceal'
+      "CopilotC-Nvim/CopilotChat.nvim",
+      requires = {
+        { 'zbirenbaum/copilot.lua'},
+        { "nvim-lua/plenary.nvim" },
+      }
     }
+    -- use "lvimuser/lsp-inlayhints.nvim"
     use "sindrets/diffview.nvim"
-    use "sourcegraph/sg.nvim"
+    -- use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
 
 
 -- Plug "tjdevries/lsp_extensions.nvim"

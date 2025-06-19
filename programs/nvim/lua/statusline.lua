@@ -64,7 +64,7 @@ local function metals_status()
 end
 
 local function bsp_status()
-  return vim.g["bsp_status"] or ""
+  return vim.g["metals_bsp_status"] or ""
 end
 
 local function readonly()

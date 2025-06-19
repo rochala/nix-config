@@ -7,6 +7,7 @@ vim.fn.sign_define("DiagnosticSignInfo", { text = "▬", texthl = "DiagnosticInf
 vim.fn.sign_define("DiagnosticSignHint", { text = "▬", texthl = "DiagnosticHint" })
 
 require('gitsigns').setup()
+require('todo-comments').setup()
 require("scrollbar").setup()
 
 cmd([[hi! link StatusError DiagnosticError]])
@@ -34,14 +35,15 @@ local highlight = {
   "IndentBlanklineChar",
 }
 
-require("ibl").setup {
-    indent = { highlight = highlight },
-    -- whitespace = {
-    --     highlight = highlight,
-    --     remove_blankline_trail = false,
-    -- },
-    -- scope = { enabled = false },
-}
+
+-- require("ibl").setup {
+--     indent = { highlight = highlight },
+--     -- whitespace = {
+--     --     highlight = highlight,
+--     --     remove_blankline_trail = false,
+--     -- },
+--     -- scope = { enabled = false },
+-- }
 
 
 

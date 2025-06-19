@@ -1,4 +1,4 @@
-{ pkgs, lib, nixpkgs, ... }:
+{ pkgs, lib, ... }:
 {
 
   environment.shells = with pkgs; [
@@ -10,7 +10,7 @@
   programs.zsh.enable = true;
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.stable;
     settings.trusted-users = [ "@admin" ];
     extraOptions = ''
       auto-optimise-store = true
@@ -23,8 +23,9 @@
 
   users.users.jrochala.home = "/Users/jrochala";
 
-  services.nix-daemon.enable = true;
+  ids.uids.nixbld = 300;
 
+  system.primaryUser = "jrochala";
   system.defaults = {
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark"; # Dark mode

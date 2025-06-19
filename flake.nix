@@ -1,27 +1,36 @@
 {
   description = "Jedrzej's system config";
-    
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.05-darwin";
-    unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+    unstable.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
 
-    darwin.url = "github:lnl7/nix-darwin/master";
+    pkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     flake-utils.url = "github:numtide/flake-utils";
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nix-smithy-ls = {
+      url = "github:ghostbuster91/nix-smithy-ls";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, darwin, nixpkgs, unstable, home-manager, ... }@inputs:
+  outputs = { self, darwin, nixpkgs, unstable, home-manager, pkgs-unstable, nix-smithy-ls, ... }@inputs:
   let
     inherit (darwin.lib) darwinSystem;
 
     overlay-unstable = final: prev: {
+      # smithy-lsp = smithy-lsp.packages.${prev.system}.default;
       unstable =  import unstable {
         system = "aarch64-darwin";
         config.allowUnfree = true;
@@ -32,12 +41,11 @@
       config = { allowUnfree = true; };
       overlays = [
         overlay-unstable
-        inputs.neovim-nightly-overlay.overlay
       ];
     };
   in {
     darwinConfigurations = rec {
-      jrochala-MacBook-Pro = darwinSystem {
+      vl-d-1182 = darwinSystem {
       system = "aarch64-darwin";
       modules = [
         ./configuration.nix

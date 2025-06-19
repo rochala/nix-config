@@ -9,7 +9,6 @@ local g = vim.g
 vim.g.mapleader = " "
 
 require("plugins")
-require("colorscheme")
 require("options")
 require("disable_builtin")
 require("lsp")
@@ -22,6 +21,7 @@ require("plugin_configuration")
 require("telescope_settings")
 require("treesitter")
 require("visuals")
+require("colorscheme")
 
 
 if vim.fn.executable("rg") then

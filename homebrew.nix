@@ -15,24 +15,27 @@ in {
     onActivation.upgrade = true;
 
     taps = [
-      "homebrew/cask"
+      # "homebrew/cask"
       "homebrew/cask-versions"
     ];
 
     brews = [
-      "openjdk@17"
-      "ltex-ls"
+      {
+        name = "neovim";
+        args = [ "HEAD" ];
+      }
     ];
 
     casks = [
       "alacritty"
+      "kitty"
       "alfred"
-      "temurin8"
+      # "temurin8"
       "discord-ptb"
       "firefox"
       "slack"
       "spotify"
-      "tutanota"
+      # "tutanota"
       "vlc"
       "signal"
       "steam"
@@ -40,13 +43,11 @@ in {
       "flux"
       "visual-studio-code"
       "qbittorrent"
-      "firefox-developer-edition"
       "obsidian"
       "figma"
       "intellij-idea-ce"
       "google-chrome"
       "element"
-      "nvidia-geforce-now"
       "visualvm"
     ];
   };

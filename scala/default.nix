@@ -11,5 +11,5 @@
   /*   JVM_DEBUG = "-J-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"; */
   /* }; */
 
-  programs.java.enable = true;
+  programs.java.enable = false;
 }

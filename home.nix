@@ -1,10 +1,13 @@
-{ config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 let
   externalPackages = import ./packages.nix { inherit pkgs; };
+  languageServers = {
+    inherit (inputs.nix-smithy-ls.packages.${pkgs.system}) aws-smithy-ls;
+  };
   allPackages = externalPackages;
 in {
-  home.stateVersion = "23.05";
+  home.stateVersion = "25.05";
 
   programs = {
     alacritty = import ./programs/alacritty/alacritty.nix;
